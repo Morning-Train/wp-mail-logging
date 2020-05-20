@@ -534,6 +534,7 @@ class WPML_OptionsManager {
                 $emailLogList = WPML_Init::getInstance()->getService('emailLogList');
                 $emailLogList->prepare_items( $search );
                 $emailLogList->search_box( __( 'Search' ), 's' );
+                do_action('no3x/wpml/email_log_list/display/before_display', $emailLogList);
                 $emailLogList->display();
                 ?>
             </form>
