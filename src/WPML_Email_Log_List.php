@@ -228,6 +228,8 @@ class WPML_Email_Log_List extends \WP_List_Table implements IHooks {
                     }
                 }
             }
+
+            do_action('no3x/wpml/email_log_list/bulk_actions/process', $name, $this);
         }
     }
 
