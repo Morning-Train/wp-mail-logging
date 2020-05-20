@@ -197,7 +197,7 @@ class WPML_Email_Log_List extends \WP_List_Table implements IHooks {
             'delete'    => 'Delete',
             'resend'	=> 'Resend'
         );
-        return $actions;
+        return apply_filters('no3x/wpml/email_log_list/bulk_actions', $actions, $this);
     }
 
     /**
