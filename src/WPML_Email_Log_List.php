@@ -134,17 +134,23 @@ class WPML_Email_Log_List extends \WP_List_Table implements IHooks {
         $current_page = $this->get_pagenum();
         $offset = ( $current_page - 1 ) * $per_page;
 
-        $total_items = Mail::query()
-            ->search( $search )
-            ->find( true );
+        $total_items_query = Mail::query()
+            ->search( $search );
 
-        $mails = Mail::query()
+        $total_items_query = apply_filters('no3x/wpml/email_log_list/prepare_items/total_items_query', $total_items_query, $this);
+
+        $total_items = $total_items_query->find( true );
+
+        $query = Mail::query()
             ->search( $search )
             ->sort_by( $orderby )
             ->order( $order )
             ->limit( $per_page )
-            ->offset( $offset )
-            ->find();
+            ->offset( $offset );
+
+        $query = apply_filters('no3x/wpml/email_log_list/prepare_items/query', $query, $this);
+
+        $mails = $query->find();
 
         foreach ( $mails as $mail ) {
             /* @var $mail Mail */
