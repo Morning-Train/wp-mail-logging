@@ -270,4 +270,8 @@ class WPML_Email_Log_List extends \WP_List_Table implements IHooks {
             'plugin_version'=> array( 'plugin_version', true ),
         );
     }
+
+    public function extra_tablenav( $which ) {
+        do_action('no3x/wpml/email_log_list/extra_tablenav', $which, $this);
+    }
 }
